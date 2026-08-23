@@ -1,0 +1,13 @@
+package com.manresa.blogging_platform_api.repository;
+
+import com.manresa.blogging_platform_api.entity.Post;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PostRepository extends JpaRepository<Post, Long> {
+
+    Page<Post> findByAuthorId(Long authorId, Pageable pageable);
+
+    Page<Post> findByCategoryId(Long categoryId, Pageable pageable);
+}
