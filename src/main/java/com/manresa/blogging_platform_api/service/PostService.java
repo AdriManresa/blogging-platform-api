@@ -101,7 +101,7 @@ public class PostService {
         post.setCategory(category);
         // Guardamos la publicación editada en la base de datos
         Post savedPost = postRepository.save(post);
-        // E. Armamos el paquete de respuesta usando el @Builder que creaste
+        // E. Armamos el paquete de respuesta usando el @Builder
         return PostResponse.builder()
                 .id(savedPost.getId())
                 .title(savedPost.getTitle())
@@ -111,4 +111,10 @@ public class PostService {
                 .build();
     }
 
+    public void deletePost(Long id) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Post no encontrado"));
+
+        postRepository.delete(post);
+    }
 }
