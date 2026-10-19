@@ -27,8 +27,12 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
     @GetMapping
-    public ResponseEntity<List<PostResponse>> getAllPosts() {
-        return ResponseEntity.ok(postService.getAllPosts());
+    public ResponseEntity<List<PostResponse>> getAllPosts(
+            @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize
+    ) {
+        // Le pasamos al servicio los números que atrapamos de la URL (o los de defecto)
+        return ResponseEntity.ok(postService.getAllPosts(pageNo, pageSize));
     }
     @GetMapping("/{id}")
     public ResponseEntity<PostResponse> getPostById( @PathVariable Long id) {
